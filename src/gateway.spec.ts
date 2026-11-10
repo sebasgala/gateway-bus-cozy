@@ -165,6 +165,8 @@ describe('gateway-esb (fase 9.4)', () => {
     assert.equal(resolverDestinoRuta('GET', '/api/v2/alojamientos/HTL-EC-0001')?.servicio, 'catalogo');
     assert.equal(resolverDestinoRuta('GET', '/api/v2/alojamientos/HTL-EC-0001/habitaciones')?.servicio, 'catalogo');
     assert.equal(resolverDestinoRuta('GET', '/api/v2/alojamientos/HTL-EC-0001/availability')?.servicio, 'catalogo');
+    assert.equal(resolverDestinoRuta('GET', '/api/v2/clientes')?.servicio, 'usuarios');
+    assert.equal(resolverDestinoRuta('POST', '/api/v2/clientes')?.servicio, 'usuarios');
   });
 
   it('valida JWT RS256 con la clave pública y verifica roles y scopes (D3)', async () => {

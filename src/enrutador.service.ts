@@ -555,6 +555,18 @@ export function resolverDestinoRuta(metodo: string, pathnameOriginal: string): R
     }
   }
 
+  // ── 3.5 Clientes v2 (/api/v2/clientes) -> usuarios ──
+  if (pathname === '/api/v2/clientes' || pathname.startsWith('/api/v2/clientes/')) {
+    const sub = pathname.slice('/api/v2/clientes'.length);
+    if ((sub === '' || sub === '/') && (m === 'GET' || m === 'POST')) {
+      return {
+        servicio: 'usuarios',
+        plantilla: '/api/v2/clientes',
+        seguridad: { acceso: 'publica' },
+      };
+    }
+  }
+
   return null;
 }
 

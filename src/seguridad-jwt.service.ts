@@ -4,7 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { GatewayProblemException } from './problemas';
 
-export type RolUsuarioGateway = 'cliente' | 'administrador' | 'superadmin';
+// recepcion: Bloque R (opera las reservas de su alojamiento; nunca usuarios, precios ni catálogo)
+export type RolUsuarioGateway = 'cliente' | 'administrador' | 'superadmin' | 'recepcion';
 export type EstadoUsuarioGateway = 'activo' | 'pendiente' | 'suspendido';
 export type RolV2Gateway = 'SERVICE' | 'CLIENTE' | 'ADMIN';
 
@@ -90,7 +91,7 @@ interface CargaTokenBruta {
 }
 
 const ES_UUID = /^[0-9a-f-]{36}$/i;
-const ROLES_USUARIO_VALIDOS = new Set<string>(['cliente', 'administrador', 'superadmin']);
+const ROLES_USUARIO_VALIDOS = new Set<string>(['cliente', 'administrador', 'superadmin', 'recepcion']);
 const ESTADOS_USUARIO_VALIDOS = new Set<string>(['activo', 'pendiente', 'suspendido']);
 const LARGO_MINIMO_SECRETO = 32;
 const LARGO_MINIMO_API_KEY = 16;

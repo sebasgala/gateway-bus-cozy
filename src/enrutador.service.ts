@@ -186,6 +186,24 @@ export function resolverDestinoRuta(metodo: string, pathnameOriginal: string): R
       };
     }
 
+    // - /api/v1/admin/cuentas* -> usuarios (Bloque R: superadmin crea alojamiento + administrador; administrador crea recepción)
+    if (sub === '/admin/cuentas' || sub.startsWith('/admin/cuentas/')) {
+      return {
+        servicio: 'usuarios',
+        plantilla: plantillaDeRuta(pathname),
+        seguridad: { acceso: 'v1_protegida', rolesPermitidos: ['administrador', 'superadmin'] },
+      };
+    }
+
+    // - /api/v1/admin/recepcion* -> reservas (Bloque R: recepción, administrador, superadmin)
+    if (sub === '/admin/recepcion' || sub.startsWith('/admin/recepcion/')) {
+      return {
+        servicio: 'reservas',
+        plantilla: plantillaDeRuta(pathname),
+        seguridad: { acceso: 'v1_protegida', rolesPermitidos: ['recepcion', 'administrador', 'superadmin'] },
+      };
+    }
+
     // - /api/v1/admin/reservas* -> reservas (administrador, superadmin)
     if (sub === '/admin/reservas' || sub.startsWith('/admin/reservas/')) {
       return {
